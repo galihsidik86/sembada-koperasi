@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg)}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tile{padding:16px;border-radius:var(--r-md);display:flex;flex-direction:column;gap:8px;min-height:96px;justify-content:space-between;border:1px solid rgba(0,0,0,0.04)}
+  .name{font:700 14px var(--font-sans)}
+  .meta{font:500 11px var(--font-mono);opacity:.8}
+  .chip{align-self:flex-start;padding:2px 8px;border-radius:var(--r-full);font:600 10px var(--font-sans);text-transform:uppercase;letter-spacing:.08em}
+</style></head>
+<body>
+<div class="row">
+  <div class="tile" style="background:#E4F0DE;color:#335829">
+    <span class="chip" style="background:#4A7C3A;color:#fff">Success</span>
+    <div><div class="name">Hijau Padi</div><div class="meta">#4A7C3A</div></div>
+  </div>
+  <div class="tile" style="background:#FAEFC9;color:#97751F">
+    <span class="chip" style="background:#D4A437;color:#5C3A1E">Accent · SHU</span>
+    <div><div class="name">Emas Kunyit</div><div class="meta">#D4A437</div></div>
+  </div>
+  <div class="tile" style="background:#FBE3DD;color:#8C2C1F">
+    <span class="chip" style="background:#C44536;color:#fff">Warning</span>
+    <div><div class="name">Bata</div><div class="meta">#C44536</div></div>
+  </div>
+  <div class="tile" style="background:#1F1B16;color:#F5F1E8">
+    <span class="chip" style="background:#F5F1E8;color:#1F1B16">Display</span>
+    <div><div class="name">Wedel</div><div class="meta">#1F1B16</div></div>
+  </div>
+</div>
+</body></html>

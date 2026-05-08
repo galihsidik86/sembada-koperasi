@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{font:700 14px var(--font-sans);padding:10px 18px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all .12s var(--ease)}
+  .primary{background:var(--primary);color:var(--fg-on-primary)}
+  .primary:hover{background:var(--primary-hover)}
+  .secondary{background:var(--surface);color:var(--primary);border-color:var(--border-strong)}
+  .ghost{background:transparent;color:var(--primary)}
+  .ghost:hover{background:rgba(139,46,46,0.06)}
+  .accent{background:var(--accent);color:var(--fg-on-accent)}
+  .danger{background:var(--danger);color:#fff}
+  .pill{border-radius:9999px;padding:8px 16px;font-size:13px}
+  .icon{display:inline-flex;align-items:center;gap:6px}
+  .small{padding:6px 12px;font-size:13px}
+</style></head>
+<body>
+<div class="row" style="margin-bottom:10px">
+  <button class="btn primary">Ajukan pinjaman</button>
+  <button class="btn secondary">Batal</button>
+  <button class="btn ghost">Pelajari</button>
+  <button class="btn accent">Cairkan SHU</button>
+  <button class="btn danger">Hapus</button>
+</div>
+<div class="row">
+  <button class="btn primary pill">Setor</button>
+  <button class="btn primary small">Kecil</button>
+  <button class="btn secondary icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+    Tambah anggota
+  </button>
+  <button class="btn primary" disabled style="opacity:.4;cursor:not-allowed">Disabled</button>
+</div>
+</body></html>

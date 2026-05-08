@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:0;background:var(--bg);color:var(--sogan-500)}
+  .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;height:170px}
+  .cell{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;color:var(--sogan-500)}
+  .cell.dark{background:var(--sogan-500);color:var(--cream-100)}
+  .cell.dark2{background:var(--tanah-700);color:var(--cream-100)}
+  .lbl{position:absolute;bottom:8px;left:10px;font:700 10px var(--font-mono);letter-spacing:.04em;background:rgba(0,0,0,.2);color:#fff;padding:2px 6px;border-radius:4px}
+</style></head>
+<body>
+<div class="row">
+  <div class="cell dark">
+    <svg width="100%" height="100%" viewBox="0 0 200 170" preserveAspectRatio="xMidYMid slice"><pattern id="p1" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse"><g fill="none" stroke="currentColor" stroke-width="1.2"><ellipse cx="15" cy="15" rx="11" ry="11"/><ellipse cx="45" cy="15" rx="11" ry="11"/><ellipse cx="15" cy="45" rx="11" ry="11"/><ellipse cx="45" cy="45" rx="11" ry="11"/><ellipse cx="30" cy="30" rx="11" ry="11"/></g></pattern><rect width="200" height="170" fill="url(#p1)" opacity=".5"/></svg>
+    <div class="lbl">kawung</div>
+  </div>
+  <div class="cell dark2">
+    <svg width="100%" height="100%" viewBox="0 0 200 170" preserveAspectRatio="xMidYMid slice"><pattern id="p2" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M0 30 Q15 15 30 30 Q45 45 60 30"/><path d="M0 50 Q15 35 30 50 Q45 65 60 50" opacity=".6"/></g></pattern><rect width="200" height="170" fill="url(#p2)" opacity=".55"/></svg>
+    <div class="lbl">parang</div>
+  </div>
+  <div class="cell" style="background:var(--cream-100)">
+    <svg width="100%" height="40" viewBox="0 0 200 40" preserveAspectRatio="none" style="margin-top:auto;margin-bottom:auto">
+      <g fill="currentColor"><polygon points="0,40 10,6 20,40"/><polygon points="20,40 30,6 40,40"/><polygon points="40,40 50,6 60,40"/><polygon points="60,40 70,6 80,40"/><polygon points="80,40 90,6 100,40"/><polygon points="100,40 110,6 120,40"/><polygon points="120,40 130,6 140,40"/><polygon points="140,40 150,6 160,40"/><polygon points="160,40 170,6 180,40"/><polygon points="180,40 190,6 200,40"/></g>
+    </svg>
+    <div class="lbl" style="color:var(--cream-100);background:var(--sogan-500)">tumpal</div>
+  </div>
+</div>
+</body></html>

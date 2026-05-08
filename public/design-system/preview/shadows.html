@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:32px 24px;background:var(--bg)}
+  .row{display:flex;gap:24px;align-items:center;justify-content:space-between}
+  .box{background:var(--surface);width:88px;height:88px;border-radius:12px;display:flex;align-items:center;justify-content:center;font:700 13px var(--font-sans);color:var(--fg1)}
+  .meta{font:500 10px var(--font-mono);color:var(--fg3);text-align:center;margin-top:8px}
+  .item{display:flex;flex-direction:column;align-items:center}
+</style></head>
+<body>
+<div class="row">
+  <div class="item"><div class="box" style="box-shadow:var(--shadow-xs)">xs</div><div class="meta">elevation 1</div></div>
+  <div class="item"><div class="box" style="box-shadow:var(--shadow-sm)">sm</div><div class="meta">card rest</div></div>
+  <div class="item"><div class="box" style="box-shadow:var(--shadow-md)">md</div><div class="meta">card hover</div></div>
+  <div class="item"><div class="box" style="box-shadow:var(--shadow-lg)">lg</div><div class="meta">popover</div></div>
+  <div class="item"><div class="box" style="box-shadow:var(--shadow-xl)">xl</div><div class="meta">modal</div></div>
+</div>
+</body></html>

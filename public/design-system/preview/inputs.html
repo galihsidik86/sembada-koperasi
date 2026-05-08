@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg)}
+  .stack{display:flex;flex-direction:column;gap:14px;max-width:440px}
+  .field label{display:block;font:600 13px var(--font-sans);color:var(--fg1);margin-bottom:6px}
+  .input{width:100%;padding:12px 14px;border:1px solid var(--border-strong);background:var(--surface);border-radius:8px;font:500 15px var(--font-sans);color:var(--fg1);outline:none}
+  .input:focus{border-color:var(--primary);box-shadow:var(--shadow-focus)}
+  .help{font:500 12px var(--font-sans);color:var(--fg2);margin-top:6px}
+  .err{color:var(--danger)}
+  .input.err{border-color:var(--danger)}
+</style></head>
+<body>
+<div class="stack">
+  <div class="field">
+    <label>Nominal pinjaman</label>
+    <input class="input" placeholder="Rp 0" value="Rp 5.000.000">
+    <div class="help">Maksimum Rp 25.000.000 per pengajuan.</div>
+  </div>
+  <div class="field">
+    <label>NIK anggota</label>
+    <input class="input err" value="3201xxx">
+    <div class="help err">NIK harus 16 digit.</div>
+  </div>
+</div>
+</body></html>

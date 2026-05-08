@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Sembada Admin — Web Dashboard</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { background: var(--bg); margin:0; min-height:100vh; display:flex; }
+  .sidebar { width:240px; background:#FFFFFF; border-right:1px solid var(--border);
+             padding:24px 16px; flex-shrink:0; height:100vh; position:sticky; top:0;
+             display:flex; flex-direction:column; }
+  .sb-logo { display:flex; align-items:center; gap:10px; padding:0 8px 24px;
+             border-bottom:1px solid var(--border); margin-bottom:14px; }
+  .sb-logo img { width:36px; height:36px; }
+  .sb-logo .name { font:600 19px var(--font-display); color:var(--tanah-700); font-variation-settings:"opsz" 36; }
+  .sb-logo .sub { font:600 9px var(--font-sans); letter-spacing:0.14em;
+                  color:var(--sogan-500); text-transform:uppercase; }
+  .sb-section { font:700 10px var(--font-sans); letter-spacing:0.12em;
+                color:var(--fg3); text-transform:uppercase; padding:14px 12px 6px; }
+  .sb-item { display:flex; align-items:center; gap:12px; padding:10px 12px;
+             border-radius:8px; font:500 14px var(--font-sans); color:var(--fg2);
+             cursor:pointer; }
+  .sb-item:hover { background:var(--cream-50); }
+  .sb-item.active { background:var(--sogan-50); color:var(--sogan-500); font-weight:700; }
+  .sb-item.active svg { stroke-width:2; }
+  .sb-foot { margin-top:auto; padding:12px; display:flex; align-items:center; gap:10px;
+             border-top:1px solid var(--border); }
+  .sb-avatar { width:34px; height:34px; border-radius:9999px; background:var(--sogan-500);
+               color:#F5F1E8; display:flex; align-items:center; justify-content:center;
+               font:700 13px var(--font-sans); }
+  .main { flex:1; min-width:0; display:flex; flex-direction:column; }
+  .topbar { height:64px; background:rgba(245,241,232,0.85); backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--border); padding:0 32px; display:flex;
+            align-items:center; gap:16px; position:sticky; top:0; z-index:5; }
+  .crumbs { font:500 13px var(--font-sans); color:var(--fg2); }
+  .crumbs .now { color:var(--fg1); font-weight:600; }
+  .search { flex:1; max-width:400px; margin-left:auto; position:relative; }
+  .search input { width:100%; padding:9px 12px 9px 38px; border:1px solid var(--border-strong);
+                  background:var(--cream-50); border-radius:8px; font:500 14px var(--font-sans);
+                  color:var(--fg1); outline:none; }
+  .search input:focus { border-color:var(--primary); box-shadow:var(--shadow-focus); }
+  .search svg { position:absolute; left:12px; top:50%; transform:translateY(-50%);
+                color:var(--fg3); }
+  .ic-btn { width:38px; height:38px; border-radius:9999px; background:transparent;
+            border:1px solid var(--border-strong); display:flex; align-items:center;
+            justify-content:center; cursor:pointer; color:var(--fg1); }
+  .content { padding:28px 32px 60px; }
+  .h1 { font:600 32px var(--font-display); font-variation-settings:"opsz" 48,"SOFT" 30;
+        color:var(--wedel-900); letter-spacing:-0.02em; }
+  .lead { font:500 15px var(--font-sans); color:var(--fg2); margin-top:4px; }
+  .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:24px; }
+  .kpi { background:#FFFFFF; border:1px solid var(--border); border-radius:12px;
+         padding:18px 20px; box-shadow:var(--shadow-sm); }
+  .kpi .lbl { font:700 11px var(--font-sans); letter-spacing:0.08em; color:var(--fg2);
+              text-transform:uppercase; }
+  .kpi .v { font:600 28px var(--font-display); font-variation-settings:"opsz" 48;
+            color:var(--wedel-900); margin-top:8px; font-feature-settings:"tnum"; }
+  .kpi .delta { font:600 12px var(--font-sans); margin-top:4px; }
+  .kpi .delta.up { color:var(--padi-500); } .kpi .delta.down { color:var(--bata-500); }
+  .panel-row { display:grid; grid-template-columns: 2fr 1fr; gap:20px; margin-top:24px; }
+  .panel { background:#FFFFFF; border:1px solid var(--border); border-radius:12px;
+           padding:20px 22px; box-shadow:var(--shadow-sm); }
+  .panel-h { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .panel-h h3 { font:700 16px var(--font-sans); color:var(--fg1); margin:0; }
+  .chart { height:200px; display:flex; align-items:flex-end; gap:6px; padding:10px 0 0; border-top:1px solid var(--border); }
+  .bar { flex:1; background:linear-gradient(180deg,#8B2E2E,#5E1F1F); border-radius:4px 4px 0 0; position:relative; }
+  .bar.muted { background:var(--cream-300); }
+  .bar-label { position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
+               font:500 10px var(--font-sans); color:var(--fg3); }
+  .table { width:100%; border-collapse:collapse; }
+  .table th { text-align:left; padding:8px 12px; font:700 11px var(--font-sans);
+              letter-spacing:0.08em; color:var(--fg2); text-transform:uppercase;
+              border-bottom:1px solid var(--border); }
+  .table td { padding:14px 12px; font:500 14px var(--font-sans); color:var(--fg1);
+              border-bottom:1px solid var(--cream-200); }
+  .table tr:last-child td { border-bottom:none; }
+  .badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px;
+           border-radius:9999px; font:700 11px var(--font-sans); letter-spacing:0.04em;
+           text-transform:uppercase; }
+  .b-warn { background:var(--accent-soft); color:var(--emas-700); }
+  .b-succ { background:var(--success-soft); color:var(--padi-700); }
+  .b-info { background:var(--info-soft); color:var(--info); }
+  .b-err { background:var(--danger-soft); color:var(--bata-700); }
+  .row-action { display:flex; gap:6px; }
+  .btn-sm { padding:6px 12px; border-radius:6px; font:600 12px var(--font-sans);
+            cursor:pointer; border:1px solid var(--border-strong); background:#fff;
+            color:var(--fg1); }
+  .btn-sm.primary { background:var(--primary); color:#F5F1E8; border:none; }
+  .btn-sm.primary:hover { background:var(--primary-hover); }
+  .avatar-mini { width:32px; height:32px; border-radius:9999px; background:var(--cream-300);
+                 color:var(--tanah-700); display:inline-flex; align-items:center;
+                 justify-content:center; font:700 12px var(--font-sans); margin-right:10px; vertical-align:middle; }
+  .stack-list { display:flex; flex-direction:column; gap:14px; }
+  .stack-item { display:flex; gap:12px; align-items:flex-start; }
+  .si-dot { width:8px; height:8px; border-radius:9999px; margin-top:6px; flex-shrink:0; }
+  .si-body { flex:1; }
+  .si-title { font:600 14px var(--font-sans); color:var(--fg1); }
+  .si-sub { font:500 12px var(--font-sans); color:var(--fg2); margin-top:2px; }
+</style>
+</head>
+<body data-screen-label="Sembada Admin Web — Dashboard">
+
+<aside class="sidebar">
+  <div class="sb-logo">
+    <img src="../../assets/logo/sembada-mark.svg">
+    <div>
+      <div class="name">Sembada</div>
+      <div class="sub">PENGURUS</div>
+    </div>
+  </div>
+
+  <div class="sb-section">Operasional</div>
+  <div class="sb-item active">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+    Dashboard
+  </div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M3 21v-1a6 6 0 0 1 12 0v1"/><circle cx="17" cy="8" r="3"/><path d="M21 21v-1a4 4 0 0 0-4-4"/></svg>
+    Anggota
+  </div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13c0-3 2.5-5 6-5h6c3.5 0 6 2 6 5v3c0 2-1.5 3.5-3.5 3.5H6.5C4.5 19.5 3 18 3 16z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    Simpanan
+  </div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    Pinjaman
+  </div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    Transaksi
+  </div>
+
+  <div class="sb-section">Laporan</div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Laporan keuangan
+  </div>
+  <div class="sb-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9c2 0 4 1 7 4 3-3 5-4 7-4M5 14c2 0 4 1 7 4 3-3 5-4 7-4"/></svg>
+    SHU & RAT
+  </div>
+
+  <div class="sb-foot">
+    <div class="sb-avatar">BW</div>
+    <div>
+      <div style="font:600 13px var(--font-sans);color:var(--fg1)">Budi Wibowo</div>
+      <div style="font:500 11px var(--font-sans);color:var(--fg2)">Pengurus · Solo</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="crumbs">Operasional / <span class="now">Dashboard</span></div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Cari anggota, NIK, atau no. pinjaman…">
+    </div>
+    <button class="ic-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+    </button>
+    <button class="btn-sm primary" style="padding:9px 14px;font-size:13px">+ Anggota baru</button>
+  </div>
+
+  <div class="content">
+    <div>
+      <div class="h1">Halo, Pak Budi</div>
+      <div class="lead">Ringkasan koperasi cabang Solo · 6 Mei 2026</div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="lbl">Total simpanan</div>
+        <div class="v">Rp 4,28 M</div>
+        <div class="delta up">▲ 6,2% bulan ini</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">Pinjaman aktif</div>
+        <div class="v">Rp 2,85 M</div>
+        <div class="delta up">▲ 3,1% bulan ini</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">Anggota aktif</div>
+        <div class="v">1.247</div>
+        <div class="delta up">+ 28 baru</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">NPL ratio</div>
+        <div class="v">2,1%</div>
+        <div class="delta down">▲ 0,3% perlu perhatian</div>
+      </div>
+    </div>
+
+    <div class="panel-row">
+      <div class="panel">
+        <div class="panel-h">
+          <h3>Pertumbuhan simpanan — 12 bulan</h3>
+          <select style="border:1px solid var(--border-strong);background:#fff;padding:6px 10px;border-radius:6px;font:500 13px var(--font-sans);color:var(--fg1)">
+            <option>2025–2026</option>
+          </select>
+        </div>
+        <div class="chart">
+          <div class="bar" style="height:32%"><div class="bar-label">Jun</div></div>
+          <div class="bar" style="height:38%"><div class="bar-label">Jul</div></div>
+          <div class="bar" style="height:44%"><div class="bar-label">Agu</div></div>
+          <div class="bar" style="height:50%"><div class="bar-label">Sep</div></div>
+          <div class="bar" style="height:56%"><div class="bar-label">Okt</div></div>
+          <div class="bar" style="height:60%"><div class="bar-label">Nov</div></div>
+          <div class="bar" style="height:65%"><div class="bar-label">Des</div></div>
+          <div class="bar" style="height:72%"><div class="bar-label">Jan</div></div>
+          <div class="bar" style="height:78%"><div class="bar-label">Feb</div></div>
+          <div class="bar" style="height:82%"><div class="bar-label">Mar</div></div>
+          <div class="bar" style="height:88%"><div class="bar-label">Apr</div></div>
+          <div class="bar" style="height:96%;background:linear-gradient(180deg,#D4A437,#97751F)"><div class="bar-label" style="color:var(--sogan-500);font-weight:700">Mei</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-h"><h3>Aktivitas terbaru</h3></div>
+        <div class="stack-list">
+          <div class="stack-item"><div class="si-dot" style="background:var(--padi-500)"></div>
+            <div class="si-body"><div class="si-title">Pinjaman Bu Sari disetujui</div>
+            <div class="si-sub">Rp 5.000.000 · 12 bulan · 2 menit lalu</div></div></div>
+          <div class="stack-item"><div class="si-dot" style="background:var(--emas-500)"></div>
+            <div class="si-body"><div class="si-title">3 pengajuan baru menunggu review</div>
+            <div class="si-sub">Pak Joko, Bu Tini, Pak Hendra</div></div></div>
+          <div class="stack-item"><div class="si-dot" style="background:var(--info)"></div>
+            <div class="si-body"><div class="si-title">Setoran simpanan wajib batch April</div>
+            <div class="si-sub">894 anggota · Rp 178,8 jt</div></div></div>
+          <div class="stack-item"><div class="si-dot" style="background:var(--bata-500)"></div>
+            <div class="si-body"><div class="si-title">2 cicilan jatuh tempo &gt;7 hari</div>
+            <div class="si-sub">Perlu follow-up</div></div></div>
+          <div class="stack-item"><div class="si-dot" style="background:var(--padi-500)"></div>
+            <div class="si-body"><div class="si-title">RAT 2025 selesai dijadwalkan</div>
+            <div class="si-sub">28 Mei · Aula Cabang Solo</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:24px">
+      <div class="panel-h">
+        <h3>Pengajuan pinjaman menunggu approval <span style="font:600 13px var(--font-sans);color:var(--fg2);margin-left:8px">3 antrian</span></h3>
+        <button class="btn-sm">Lihat semua</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr><th>Anggota</th><th>Tujuan</th><th>Nominal</th><th>Tenor</th><th>Diajukan</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="avatar-mini">JK</span>Joko Susilo<div style="font:500 11px var(--font-mono);color:var(--fg3);margin-left:42px">NA-00321</div></td>
+            <td>Modal usaha warung</td>
+            <td class="tabular" style="font-weight:700">Rp 8.000.000</td>
+            <td>18 bulan</td>
+            <td>Hari ini, 09:14</td>
+            <td><span class="badge b-warn"><span style="width:6px;height:6px;border-radius:9999px;background:var(--emas-500)"></span>Menunggu</span></td>
+            <td class="row-action">
+              <button class="btn-sm">Tolak</button>
+              <button class="btn-sm primary">Setujui</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="avatar-mini">TS</span>Tini Sumarni<div style="font:500 11px var(--font-mono);color:var(--fg3);margin-left:42px">NA-00455</div></td>
+            <td>Pendidikan anak</td>
+            <td class="tabular" style="font-weight:700">Rp 4.500.000</td>
+            <td>12 bulan</td>
+            <td>Hari ini, 08:02</td>
+            <td><span class="badge b-info"><span style="width:6px;height:6px;border-radius:9999px;background:var(--info)"></span>Diproses</span></td>
+            <td class="row-action">
+              <button class="btn-sm">Tolak</button>
+              <button class="btn-sm primary">Setujui</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="avatar-mini">HW</span>Hendra Wijaya<div style="font:500 11px var(--font-mono);color:var(--fg3);margin-left:42px">NA-00612</div></td>
+            <td>Renovasi rumah</td>
+            <td class="tabular" style="font-weight:700">Rp 15.000.000</td>
+            <td>24 bulan</td>
+            <td>Kemarin, 16:38</td>
+            <td><span class="badge b-warn"><span style="width:6px;height:6px;border-radius:9999px;background:var(--emas-500)"></span>Menunggu</span></td>
+            <td class="row-action">
+              <button class="btn-sm">Tolak</button>
+              <button class="btn-sm primary">Setujui</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:9999px;font:700 11px var(--font-sans);letter-spacing:.04em;text-transform:uppercase}
+  .dot{width:6px;height:6px;border-radius:9999px}
+  .succ{background:var(--success-soft);color:var(--padi-700)} .succ .dot{background:var(--padi-500)}
+  .warn{background:var(--accent-soft);color:var(--emas-700)} .warn .dot{background:var(--emas-500)}
+  .err{background:var(--danger-soft);color:var(--bata-700)} .err .dot{background:var(--bata-500)}
+  .info{background:var(--info-soft);color:var(--info)} .info .dot{background:var(--info)}
+  .neutral{background:var(--cream-200);color:var(--fg1)} .neutral .dot{background:var(--fg2)}
+  .tag{padding:4px 10px;border-radius:6px;font:600 12px var(--font-sans);background:var(--cream-200);color:var(--fg1)}
+  .tag.brand{background:var(--sogan-50);color:var(--sogan-700)}
+</style></head>
+<body>
+<div class="row">
+  <span class="badge succ"><span class="dot"></span>Aktif</span>
+  <span class="badge warn"><span class="dot"></span>Menunggu</span>
+  <span class="badge err"><span class="dot"></span>Jatuh tempo</span>
+  <span class="badge info"><span class="dot"></span>Diproses</span>
+  <span class="badge neutral"><span class="dot"></span>Tidak aktif</span>
+  <span class="tag brand">Anggota Baru</span>
+  <span class="tag">UMKM</span>
+</div>
+</body></html>

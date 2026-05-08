@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Sembada Design System</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body{margin:0;background:var(--bg);min-height:100vh;color:var(--fg1);font-family:var(--font-sans)}
+  .hero{background:linear-gradient(135deg,#5C3A1E 0%,#8B2E2E 100%);color:var(--cream-100);padding:80px 56px 96px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;background-image:url('assets/patterns/kawung.svg');background-size:120px;opacity:0.07;pointer-events:none}
+  .lockup{display:flex;align-items:center;gap:14px;margin-bottom:32px;position:relative}
+  .lockup img{width:56px;height:56px;filter:brightness(0) invert(1);opacity:0.95}
+  .lockup .nm{font:600 36px var(--font-display);font-variation-settings:"opsz" 72,"SOFT" 30;letter-spacing:-0.02em}
+  .lockup .sb{font:700 11px var(--font-sans);letter-spacing:0.18em;color:var(--emas-300);margin-top:2px}
+  h1{font:600 64px/1.05 var(--font-display);font-variation-settings:"opsz" 144,"SOFT" 30;letter-spacing:-0.02em;margin:0 0 18px;max-width:880px;position:relative}
+  .lede{font:500 19px/1.55 var(--font-sans);color:rgba(245,241,232,0.82);max-width:680px;position:relative}
+  .container{max-width:1180px;margin:0 auto;padding:64px 56px}
+  .sec-h{font:600 11px var(--font-sans);letter-spacing:0.16em;color:var(--sogan-500);text-transform:uppercase;margin-bottom:14px}
+  .sec-t{font:600 36px/1.15 var(--font-display);font-variation-settings:"opsz" 72,"SOFT" 30;color:var(--wedel-900);margin:0 0 12px;letter-spacing:-0.01em}
+  .sec-d{font:500 16px/1.6 var(--font-sans);color:var(--fg2);max-width:680px;margin-bottom:32px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid.k2{grid-template-columns:repeat(2,1fr)}
+  .tile{background:#FFFFFF;border:1px solid var(--border);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform 240ms cubic-bezier(0.32,0.72,0,1),box-shadow 240ms;box-shadow:var(--shadow-sm)}
+  .tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .tile .thumb{aspect-ratio:16/10;background:var(--cream-100);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--cream-200);position:relative;overflow:hidden}
+  .tile .thumb svg{width:60%;height:auto}
+  .tile .body{padding:16px 18px}
+  .tile .kind{font:700 10px var(--font-sans);letter-spacing:0.12em;color:var(--sogan-500);text-transform:uppercase}
+  .tile .title{font:700 16px var(--font-sans);color:var(--fg1);margin:6px 0 4px}
+  .tile .desc{font:500 13px/1.5 var(--font-sans);color:var(--fg2)}
+  /* preview svg shapes */
+  .pv-mob{background:linear-gradient(180deg,#F5F1E8 0%,#ECE5D8 100%)}
+  .pv-mob .phone{width:54%;height:80%;background:#1F1B16;border-radius:14px;padding:6px;box-shadow:0 14px 30px rgba(92,58,30,0.25)}
+  .pv-mob .scr{width:100%;height:100%;background:#F5F1E8;border-radius:10px;padding:10px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px}
+  .pv-mob .h{height:8px;width:50%;background:#5C3A1E;border-radius:2px}
+  .pv-mob .card{flex:1;background:linear-gradient(135deg,#5C3A1E,#8B2E2E);border-radius:6px}
+  .pv-mob .row{display:flex;gap:4px}
+  .pv-mob .row>div{flex:1;height:30px;background:#FFFFFF;border-radius:4px;border:1px solid #ECE5D8}
+  .pv-web{padding:18px;display:flex;gap:8px}
+  .pv-web .side{width:25%;background:#5C3A1E;border-radius:6px;display:flex;flex-direction:column;gap:5px;padding:8px}
+  .pv-web .side>div{height:6px;background:rgba(245,241,232,0.3);border-radius:2px}
+  .pv-web .side>div:first-child{background:#D4A437;width:60%}
+  .pv-web .main{flex:1;display:flex;flex-direction:column;gap:6px}
+  .pv-web .main>.bar{height:8px;background:#FFFFFF;border:1px solid #ECE5D8;border-radius:2px}
+  .pv-web .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+  .pv-web .stats>div{height:36px;background:#FFFFFF;border:1px solid #ECE5D8;border-radius:4px}
+  .pv-web .chart{flex:1;background:#FFFFFF;border:1px solid #ECE5D8;border-radius:4px;background-image:linear-gradient(180deg,transparent 60%,rgba(74,124,58,0.15) 60%)}
+  .pv-mark{padding:14px;display:flex;flex-direction:column;gap:8px}
+  .pv-mark .nav{height:14px;background:#FFFFFF;border:1px solid #ECE5D8;border-radius:3px}
+  .pv-mark .hero{flex:1;background:linear-gradient(135deg,#5C3A1E,#8B2E2E);border-radius:6px;padding:14px;color:#F5F1E8;display:flex;align-items:flex-end}
+  .pv-mark .hero .t{font:600 18px var(--font-display);font-variation-settings:"opsz" 36}
+  .pv-print{background:#D6C9B3;display:flex;align-items:center;justify-content:center;gap:8px}
+  .pv-print .card{width:60%;height:55%;background:linear-gradient(135deg,#5C3A1E,#8B2E2E);border-radius:8px;padding:10px;color:#F5F1E8;display:flex;flex-direction:column;justify-content:space-between;font:600 8px var(--font-display);box-shadow:0 6px 16px rgba(0,0,0,0.18)}
+  .pv-print .card .b{font:700 6px var(--font-sans);letter-spacing:0.16em;color:#ECC979}
+  .pv-print .card .nm{font:600 14px var(--font-display);font-variation-settings:"opsz" 36}
+  .pv-mail{padding:14px;background:#D6C9B3;display:flex;align-items:center;justify-content:center}
+  .pv-mail .e{width:80%;height:88%;background:#FFFFFF;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 16px rgba(0,0,0,0.1)}
+  .pv-mail .h{height:18px;background:#5C3A1E}
+  .pv-mail .acc{height:3px;background:repeating-linear-gradient(90deg,#A86B2E 0,#A86B2E 6px,#D4A437 6px,#D4A437 9px)}
+  .pv-mail .b{flex:1;padding:8px;display:flex;flex-direction:column;gap:4px}
+  .pv-mail .b>div{height:5px;background:#ECE5D8;border-radius:2px}
+  .pv-mail .b>div.short{width:40%}
+  .pv-mail .b>div.btn{width:35%;height:14px;background:#A86B2E;margin-top:6px;border-radius:3px}
+  .pv-teller{padding:0;display:flex}
+  .pv-teller .side{width:22%;background:#1F1B16;display:flex;flex-direction:column;gap:4px;padding:8px}
+  .pv-teller .side>div{height:5px;background:rgba(245,241,232,0.3);border-radius:2px}
+  .pv-teller .side>div:nth-child(2){background:#A86B2E}
+  .pv-teller .main{flex:1;background:#F5F1E8;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
+  .pv-teller .main>div{background:#FFFFFF;border:1px solid #ECE5D8;border-radius:4px}
+  .pv-foundations{background:linear-gradient(135deg,#F5F1E8,#ECE5D8);padding:18px;display:flex;flex-direction:column;gap:8px}
+  .pv-foundations .swatches{display:flex;gap:4px;height:30px}
+  .pv-foundations .swatches>div{flex:1;border-radius:4px}
+  .pv-foundations .type{font:600 28px var(--font-display);font-variation-settings:"opsz" 72,"SOFT" 30;color:#1F1B16;letter-spacing:-0.01em;line-height:1}
+  .pv-foundations .type .small{font:500 14px var(--font-sans);color:#5E6464;display:block;margin-top:4px;letter-spacing:0}
+  .footer{padding:48px 56px;background:var(--tanah-900);color:var(--cream-300);font:500 13px var(--font-sans);text-align:center}
+</style></head>
+<body data-screen-label="Sembada Design System Index">
+
+<div class="hero">
+  <div class="lockup">
+    <img src="assets/logo/sembada-mark.svg">
+    <div><div class="nm">Sembada</div><div class="sb">DESIGN SYSTEM</div></div>
+  </div>
+  <h1>Koperasi simpan pinjam digital, dibikin hangat dan tepercaya.</h1>
+  <p class="lede">Dari anggota, oleh anggota, untuk anggota. Sistem desain lengkap untuk lima permukaan produk Sembada — dari aplikasi anggota di pasar, sampai dashboard pengawas di kantor cabang, dengan satu suara dan satu bahasa visual.</p>
+</div>
+
+<div class="container">
+
+  <div class="sec-h">Foundations</div>
+  <h2 class="sec-t">Fondasi sistem</h2>
+  <p class="sec-d">Mulai di sini sebelum membuat apa pun. Token warna, tipografi, dan komponen dasar.</p>
+  <div class="grid">
+    <a class="tile" href="README.md">
+      <div class="thumb pv-foundations">
+        <div class="swatches">
+          <div style="background:#5C3A1E"></div>
+          <div style="background:#8B2E2E"></div>
+          <div style="background:#A86B2E"></div>
+          <div style="background:#D4A437"></div>
+          <div style="background:#4A7C3A"></div>
+          <div style="background:#F5F1E8;border:1px solid #ECE5D8"></div>
+        </div>
+        <div class="type">Sembada<span class="small">Plus Jakarta Sans · Fraunces</span></div>
+      </div>
+      <div class="body">
+        <div class="kind">Brand bible</div>
+        <div class="title">README.md</div>
+        <div class="desc">Konteks produk, voice, content rules, visual rules, iconography.</div>
+      </div>
+    </a>
+    <a class="tile" href="colors_and_type.css">
+      <div class="thumb" style="background:#1F1B16;color:#F5F1E8;font:500 12px/1.5 var(--font-mono);padding:18px;align-items:flex-start;justify-content:flex-start;text-align:left">
+        <div>
+          <span style="color:#8C6B4A">--sogan-500:</span> #A86B2E;<br>
+          <span style="color:#8C6B4A">--cream-100:</span> #F5F1E8;<br>
+          <span style="color:#8C6B4A">--padi-600:</span> #4A7C3A;<br>
+          <span style="color:#8C6B4A">--font-display:</span> Fraunces;<br>
+          <span style="color:#8C6B4A">--shadow-md:</span> 0 6px 16px<br>&nbsp;&nbsp;rgba(92,58,30,0.10);
+        </div>
+      </div>
+      <div class="body">
+        <div class="kind">Tokens</div>
+        <div class="title">colors_and_type.css</div>
+        <div class="desc">Semua CSS variables: warna, tipografi, spacing, shadow, radius, motion.</div>
+      </div>
+    </a>
+    <a class="tile" href="preview/components.html">
+      <div class="thumb" style="background:#F5F1E8;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:6px"><span style="padding:6px 12px;background:#A86B2E;color:#F5F1E8;border-radius:6px;font:700 10px var(--font-sans)">Setor</span><span style="padding:6px 12px;background:#FFFFFF;color:#5C3A1E;border:1px solid #5C3A1E;border-radius:6px;font:700 10px var(--font-sans)">Tarik</span></div>
+        <div style="background:#FFFFFF;border:1px solid #ECE5D8;border-radius:8px;padding:8px 12px;font:500 9px var(--font-sans);width:60%"><div style="color:#8C6B4A;font-size:7px;letter-spacing:0.1em">SIMPANAN</div><div style="font:600 14px var(--font-display);color:#1F1B16">Rp 12.420.000</div></div>
+      </div>
+      <div class="body">
+        <div class="kind">Components</div>
+        <div class="title">Preview cards</div>
+        <div class="desc">Type, color, spacing, components, brand swatches untuk Design System tab.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sec-h" style="margin-top:64px">Surfaces</div>
+  <h2 class="sec-t">Lima permukaan, satu sistem</h2>
+  <p class="sec-d">Dari mobile anggota di pasar, sampai dashboard pengawas — semuanya berbagi tipografi, warna, dan suara yang sama.</p>
+  <div class="grid">
+    <a class="tile" href="ui_kits/member_mobile/index.html">
+      <div class="thumb pv-mob">
+        <div class="phone"><div class="scr">
+          <div class="h"></div>
+          <div class="card"></div>
+          <div class="row"><div></div><div></div></div>
+          <div class="row"><div style="height:14px"></div></div>
+        </div></div>
+      </div>
+      <div class="body">
+        <div class="kind">Mobile · iOS</div>
+        <div class="title">Sembada Anggota</div>
+        <div class="desc">Aplikasi member: saldo, setor, ajukan pinjaman, transfer, SHU.</div>
+      </div>
+    </a>
+    <a class="tile" href="ui_kits/admin_mobile/index.html">
+      <div class="thumb pv-mob">
+        <div class="phone" style="background:#5C3A1E"><div class="scr">
+          <div class="h" style="background:#A86B2E"></div>
+          <div class="row"><div></div><div></div></div>
+          <div class="card" style="background:linear-gradient(135deg,#8B2E2E,#5E1F1F)"></div>
+          <div class="row"><div style="height:18px"></div></div>
+        </div></div>
+      </div>
+      <div class="body">
+        <div class="kind">Mobile · Android</div>
+        <div class="title">Sembada Pengurus</div>
+        <div class="desc">Approval pinjaman cepat, kunjungan anggota, input simpanan harian.</div>
+      </div>
+    </a>
+    <a class="tile" href="ui_kits/admin_web/index.html">
+      <div class="thumb pv-web">
+        <div class="side"><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="main">
+          <div class="bar"></div>
+          <div class="stats"><div></div><div></div><div></div></div>
+          <div class="chart"></div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="kind">Web</div>
+        <div class="title">Sembada Admin Web</div>
+        <div class="desc">Dashboard pengurus: statistik cabang, anggota, approval, laporan SHU.</div>
+      </div>
+    </a>
+    <a class="tile" href="ui_kits/marketing_web/index.html">
+      <div class="thumb pv-mark">
+        <div class="nav"></div>
+        <div class="hero"><div class="t">Koperasi yang kamu pegang sendiri.</div></div>
+      </div>
+      <div class="body">
+        <div class="kind">Marketing</div>
+        <div class="title">Sembada.id</div>
+        <div class="desc">Landing page untuk koperasi mitra dan calon anggota.</div>
+      </div>
+    </a>
+    <a class="tile" href="ui_kits/teller_desktop/index.html">
+      <div class="thumb pv-teller">
+        <div class="side"><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="main"><div></div><div></div><div style="grid-column:span 2"></div></div>
+      </div>
+      <div class="body">
+        <div class="kind">Desktop</div>
+        <div class="title">Sembada Teller</div>
+        <div class="desc">Terminal kasir cabang — keyboard-first, dense, F-key shortcuts.</div>
+      </div>
+    </a>
+    <a class="tile" href="SKILL.md">
+      <div class="thumb" style="background:#1F1B16;color:#F5F1E8;flex-direction:column;gap:6px;padding:18px;align-items:flex-start;justify-content:center">
+        <div style="font:700 9px var(--font-sans);letter-spacing:0.16em;color:#D4A437">SKILL MANIFEST</div>
+        <div style="font:600 18px/1.2 var(--font-display);font-variation-settings:'opsz' 36">Use this system whenever the brief calls for warm, koperasi-flavored design.</div>
+      </div>
+      <div class="body">
+        <div class="kind">Skill</div>
+        <div class="title">SKILL.md</div>
+        <div class="desc">Manifest untuk Agent Skills — kapan harus pakai sistem ini, kapan tidak.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sec-h" style="margin-top:64px">Material fisik & kanal</div>
+  <h2 class="sec-t">Bukan cuma layar</h2>
+  <p class="sec-d">Koperasi hidup di kertas dan kotak masuk juga. Kartu anggota, formulir pinjaman, dan email transaksional — semuanya bicara bahasa yang sama.</p>
+  <div class="grid k2">
+    <a class="tile" href="print/kartu-anggota.html">
+      <div class="thumb pv-print">
+        <div class="card">
+          <div><div class="b">SEMBADA</div></div>
+          <div><div class="nm">Sari Rahayu</div><div style="font:600 7px var(--font-mono);color:rgba(245,241,232,0.7);margin-top:2px">NA-00821</div></div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="kind">Print · CR80</div>
+        <div class="title">Kartu Anggota</div>
+        <div class="desc">Front + back card dengan parang overlay, magstripe, dan QR.</div>
+      </div>
+    </a>
+    <a class="tile" href="print/formulir-pinjaman.html">
+      <div class="thumb" style="background:#D6C9B3;display:flex;align-items:center;justify-content:center">
+        <div style="width:50%;height:90%;background:#FFFFFF;border-radius:3px;padding:10px;box-shadow:0 6px 16px rgba(0,0,0,0.15);display:flex;flex-direction:column;gap:5px;font:500 6px var(--font-sans)">
+          <div style="height:3px;background:repeating-linear-gradient(90deg,#A86B2E 0,#A86B2E 5px,#D4A437 5px,#D4A437 8px);margin:-10px -10px 4px;border-radius:3px 3px 0 0"></div>
+          <div style="font:600 9px var(--font-display);color:#1F1B16;text-align:center">Formulir Pinjaman</div>
+          <div style="height:5px;background:#A86B2E;border-radius:1px;width:100%"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px"><div style="height:3px;background:#ECE5D8"></div><div style="height:3px;background:#ECE5D8"></div></div>
+          <div style="height:5px;background:#A86B2E;border-radius:1px;width:100%;margin-top:2px"></div>
+          <div style="background:#F5F1E8;height:14px;border-radius:2px"></div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="kind">Print · A4</div>
+        <div class="title">Formulir Pinjaman</div>
+        <div class="desc">4 section bernomor, 3 kolom tanda tangan, ornamen tumpal.</div>
+      </div>
+    </a>
+    <a class="tile" href="email/templates.html">
+      <div class="thumb pv-mail">
+        <div class="e">
+          <div class="h"></div>
+          <div class="acc"></div>
+          <div class="b"><div class="short"></div><div></div><div></div><div class="short"></div><div class="btn"></div></div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="kind">Email</div>
+        <div class="title">Transactional templates</div>
+        <div class="desc">Setoran berhasil, pinjaman disetujui, pengingat cicilan — table-based, email-safe.</div>
+      </div>
+    </a>
+    <a class="tile" href="assets/">
+      <div class="thumb" style="background:#5C3A1E;background-image:url('assets/patterns/kawung.svg');background-size:80px;display:flex;align-items:center;justify-content:center">
+        <img src="assets/logo/sembada-mark.svg" style="width:40%;filter:brightness(0) invert(1);opacity:0.95">
+      </div>
+      <div class="body">
+        <div class="kind">Brand kit</div>
+        <div class="title">Assets</div>
+        <div class="desc">Logo (mark + lockup), batik motifs (kawung, parang, tumpal), custom icons.</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  Sembada Design System · sistem fiktif untuk koperasi simpan pinjam digital · dibuat dari nol dalam satu sesi · semua keputusan bisa diubah.
+</div>
+</body></html>

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Sembada — Koperasi simpan pinjam digital</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { margin:0; background:var(--bg); }
+  .container { max-width:1200px; margin:0 auto; padding:0 32px; }
+  /* Nav */
+  nav.top { padding:20px 0; display:flex; align-items:center; justify-content:space-between; }
+  nav.top .links { display:flex; gap:32px; }
+  nav.top .links a { font:600 14px var(--font-sans); color:var(--fg1); text-decoration:none; }
+  nav.top .links a:hover { color:var(--sogan-500); }
+  nav.top .cta { display:flex; gap:10px; align-items:center; }
+  .btn { font:700 14px var(--font-sans); padding:10px 18px; border-radius:8px;
+         border:1px solid transparent; cursor:pointer; text-decoration:none; display:inline-block; }
+  .btn.primary { background:var(--primary); color:#F5F1E8; }
+  .btn.primary:hover { background:var(--primary-hover); }
+  .btn.ghost { background:transparent; color:var(--fg1); border-color:var(--border-strong); }
+
+  /* Hero */
+  .hero { padding:60px 0 80px; position:relative; overflow:hidden; }
+  .hero-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center; }
+  .eyebrow { font:700 12px var(--font-sans); letter-spacing:0.14em;
+             text-transform:uppercase; color:var(--sogan-500); }
+  .hero h1 { font:600 72px/1 var(--font-display); font-variation-settings:"opsz" 144,"SOFT" 30;
+             color:var(--wedel-900); letter-spacing:-0.025em; margin:14px 0 18px; }
+  .hero h1 em { color:var(--sogan-500); font-style:italic; font-variation-settings:"opsz" 144,"SOFT" 60; }
+  .hero p { font:500 18px/1.55 var(--font-sans); color:var(--fg2); max-width:480px; }
+  .hero .actions { display:flex; gap:12px; margin-top:28px; }
+  .hero .actions .btn.primary { padding:14px 22px; font-size:15px; }
+  .hero .trust { display:flex; gap:24px; margin-top:32px; align-items:center; }
+  .trust-item .n { font:600 26px var(--font-display); color:var(--sogan-500); font-feature-settings:"tnum"; }
+  .trust-item .l { font:500 12px var(--font-sans); color:var(--fg2); }
+
+  /* Hero visual = phone with batik bg */
+  .hero-vis { position:relative; aspect-ratio:1; max-width:480px; justify-self:end; }
+  .hero-vis::before { content:""; position:absolute; inset:0;
+    background:linear-gradient(140deg,#8B2E2E,#5E1F1F); border-radius:32px;
+    transform:rotate(-3deg); }
+  .hero-vis::after { content:""; position:absolute; inset:0; border-radius:32px;
+    background-image:url('../../assets/patterns/kawung.svg');
+    background-size:80px; opacity:0.1; transform:rotate(-3deg); }
+  .hero-card { position:absolute; inset:30px; background:#FFFFFF; border-radius:20px;
+    box-shadow:0 20px 60px rgba(92,58,30,0.25); padding:24px; display:flex;
+    flex-direction:column; gap:18px; }
+  .hc-greet { font:500 14px var(--font-sans); color:var(--fg2); }
+  .hc-amount { font:600 48px var(--font-display); font-variation-settings:"opsz" 96,"SOFT" 30;
+    color:var(--wedel-900); letter-spacing:-0.02em; font-feature-settings:"tnum"; }
+  .hc-actions { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:auto; }
+  .hc-act { display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 0;
+    background:var(--cream-50); border-radius:12px; font:600 11px var(--font-sans); color:var(--fg1); }
+  .hc-act svg { color:var(--sogan-500); }
+  .hc-tx { display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--border); }
+  .hc-tx-i { width:32px; height:32px; border-radius:9pt; background:var(--success-soft); color:var(--padi-500);
+    display:flex; align-items:center; justify-content:center; }
+  .hc-tx .t { flex:1; font:600 13px var(--font-sans); color:var(--fg1); }
+  .hc-tx .a { font:700 13px var(--font-sans); color:var(--padi-500); font-feature-settings:"tnum"; }
+
+  /* Logo cloud */
+  .clouds { padding:30px 0 60px; text-align:center; }
+  .clouds-lbl { font:600 11px var(--font-sans); letter-spacing:0.14em;
+                color:var(--fg2); text-transform:uppercase; }
+  .clouds-row { display:flex; gap:48px; justify-content:center; align-items:center; margin-top:18px; flex-wrap:wrap; opacity:0.55; }
+  .cloud { font:600 22px var(--font-display); color:var(--tanah-700); font-variation-settings:"opsz" 36,"SOFT" 30; }
+
+  /* Features */
+  .features { padding:80px 0; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .section-h { text-align:center; margin-bottom:56px; }
+  .section-h h2 { font:600 48px/1.05 var(--font-display); font-variation-settings:"opsz" 96,"SOFT" 30;
+    color:var(--wedel-900); letter-spacing:-0.02em; margin:14px 0 12px; }
+  .section-h p { font:500 17px var(--font-sans); color:var(--fg2); max-width:560px; margin:0 auto; }
+  .feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .feat { background:var(--bg); border:1px solid var(--border); border-radius:16px;
+          padding:28px 24px; }
+  .feat-i { width:48px; height:48px; border-radius:14px; background:var(--sogan-50); color:var(--sogan-500);
+            display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+  .feat h3 { font:700 19px var(--font-sans); color:var(--fg1); margin:0 0 8px; }
+  .feat p { font:500 14px/1.55 var(--font-sans); color:var(--fg2); }
+
+  /* Quote */
+  .quote { padding:96px 0; position:relative; overflow:hidden; background:var(--sogan-500); color:var(--cream-100); }
+  .quote::after { content:""; position:absolute; inset:0;
+    background-image:url('../../assets/patterns/parang.svg'); background-size:120px;
+    opacity:0.08; pointer-events:none; }
+  .quote .container { position:relative; }
+  .quote-text { font:600 40px/1.25 var(--font-display); font-variation-settings:"opsz" 96,"SOFT" 30;
+    letter-spacing:-0.01em; max-width:760px; }
+  .quote-att { display:flex; align-items:center; gap:14px; margin-top:28px; }
+  .quote-av { width:52px; height:52px; border-radius:9999px; background:var(--cream-100);
+    color:var(--sogan-700); display:flex; align-items:center; justify-content:center;
+    font:700 18px var(--font-sans); }
+  .quote-name { font:700 15px var(--font-sans); }
+  .quote-role { font:500 13px var(--font-sans); color:var(--cream-300); margin-top:2px; }
+
+  /* CTA strip */
+  .cta-strip { padding:80px 0; text-align:center; }
+  .cta-strip h2 { font:600 44px var(--font-display); font-variation-settings:"opsz" 96,"SOFT" 30;
+    color:var(--wedel-900); letter-spacing:-0.02em; }
+  .cta-strip p { font:500 17px var(--font-sans); color:var(--fg2); margin-top:10px; }
+  .cta-strip .btn { margin-top:28px; padding:16px 28px; font-size:16px; }
+
+  /* Footer */
+  footer { background:var(--tanah-900); color:var(--cream-200); padding:48px 0 28px; }
+  .foot-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
+  .foot-grid h4 { font:700 12px var(--font-sans); letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--cream-100); margin:0 0 14px; }
+  .foot-grid a { font:500 14px/2 var(--font-sans); color:var(--cream-300); text-decoration:none; display:block; }
+  .foot-grid a:hover { color:var(--cream-100); }
+  .foot-bot { margin-top:36px; padding-top:20px; border-top:1px solid rgba(245,241,232,0.12);
+    font:500 13px var(--font-sans); color:var(--cream-400); display:flex; justify-content:space-between; }
+</style>
+</head>
+<body data-screen-label="Sembada.id — Marketing">
+
+<header class="container">
+  <nav class="top">
+    <a href="#" style="display:flex;align-items:center;text-decoration:none">
+      <img src="../../assets/logo/sembada-lockup.svg" height="48">
+    </a>
+    <div class="links">
+      <a href="#fitur">Fitur</a>
+      <a href="#koperasi">Untuk koperasi</a>
+      <a href="#cerita">Cerita anggota</a>
+      <a href="#harga">Harga</a>
+      <a href="#bantuan">Bantuan</a>
+    </div>
+    <div class="cta">
+      <a href="#" class="btn ghost">Masuk</a>
+      <a href="#" class="btn primary">Daftar koperasi</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Koperasi simpan pinjam · digital</div>
+      <h1>Koperasi yang <em>tumbuh</em><br>bareng anggotanya.</h1>
+      <p>Kelola simpanan, ajukan pinjaman, dan terima SHU dari satu aplikasi. Dibangun untuk anggota dan pengurus koperasi di Indonesia — bukan bank, bukan dompet digital.</p>
+      <div class="actions">
+        <a href="#" class="btn primary">Mulai gratis untuk koperasi</a>
+        <a href="#" class="btn ghost">Lihat demo (3 menit)</a>
+      </div>
+      <div class="trust">
+        <div class="trust-item"><div class="n">128</div><div class="l">Koperasi mitra</div></div>
+        <div style="width:1px;height:36px;background:var(--border)"></div>
+        <div class="trust-item"><div class="n">42rb</div><div class="l">Anggota aktif</div></div>
+        <div style="width:1px;height:36px;background:var(--border)"></div>
+        <div class="trust-item"><div class="n">Rp 280 M</div><div class="l">Simpanan dikelola</div></div>
+      </div>
+    </div>
+    <div class="hero-vis">
+      <div class="hero-card">
+        <div>
+          <div class="hc-greet">Halo, Bu Sari</div>
+          <div style="font:500 13px var(--font-sans);color:var(--fg3);margin-top:2px">Total simpanan kamu</div>
+          <div class="hc-amount">Rp 12,4 jt</div>
+          <div style="font:600 12px var(--font-sans);color:var(--padi-500);margin-top:4px">+Rp 250.000 bulan ini</div>
+        </div>
+        <div class="hc-tx">
+          <div class="hc-tx-i"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
+          <div class="t">Setor sukarela<div style="font:500 11px var(--font-sans);color:var(--fg3);font-weight:500">Hari ini</div></div>
+          <div class="a">+ Rp 500rb</div>
+        </div>
+        <div class="hc-actions">
+          <div class="hc-act"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>Setor</div>
+          <div class="hc-act"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pinjaman</div>
+          <div class="hc-act"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Tagihan</div>
+          <div class="hc-act"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 9c2 0 4 1 7 4 3-3 5-4 7-4M5 14c2 0 4 1 7 4 3-3 5-4 7-4"/></svg>SHU</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clouds container">
+  <div class="clouds-lbl">Dipakai oleh koperasi di seluruh Indonesia</div>
+  <div class="clouds-row">
+    <div class="cloud">KSP Sejahtera</div>
+    <div class="cloud">Kopdit Mekar</div>
+    <div class="cloud">Bina Mandiri</div>
+    <div class="cloud">Kopwan Srikandi</div>
+    <div class="cloud">KSU Tani Jaya</div>
+    <div class="cloud">Kopkar Nusantara</div>
+  </div>
+</section>
+
+<section class="features" id="fitur">
+  <div class="container">
+    <div class="section-h">
+      <div class="eyebrow">Fitur</div>
+      <h2>Semua kebutuhan koperasi,<br>dalam satu aplikasi.</h2>
+      <p>Dari setoran simpanan harian sampai pencairan SHU tahunan. Sembada bicara bahasa koperasi, bukan bahasa bank.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-i"><img src="../../assets/icons/simpanan.svg" width="28" height="28"></div>
+        <h3>Simpanan transparan</h3>
+        <p>Pokok, wajib, dan sukarela tercatat real-time. Anggota lihat setiap rupiah yang masuk dan kapan.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-i"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Pengajuan pinjaman cepat</h3>
+        <p>Anggota ajukan dari HP, pengurus approve dari laptop. Standar 1×24 jam. Bunga jasa transparan.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-i"><img src="../../assets/icons/shu.svg" width="28" height="28"></div>
+        <h3>SHU otomatis</h3>
+        <p>Hitung dan distribusi SHU sesuai jasa simpan & jasa pinjam. Anggota tahu hak mereka — pengurus tidak perlu kalkulator manual.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-i"><img src="../../assets/icons/gotong-royong.svg" width="28" height="28"></div>
+        <h3>Transfer antar anggota</h3>
+        <p>Kirim uang ke sesama anggota tanpa biaya. Tetap dalam ekosistem koperasi.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-i"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></div>
+        <h3>Dashboard pengurus</h3>
+        <p>Statistik simpanan, NPL ratio, antrian approval. Siap export untuk laporan RAT.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-i"><img src="../../assets/icons/kartu-anggota.svg" width="28" height="28"></div>
+        <h3>Kartu anggota digital</h3>
+        <p>QR untuk identifikasi di kantor cabang, plus kartu fisik kalau dibutuhkan untuk RAT atau acara koperasi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote" id="cerita">
+  <div class="container">
+    <div class="eyebrow" style="color:var(--emas-300)">Cerita anggota</div>
+    <div class="quote-text" style="margin-top:14px">
+      "Dulu setor simpanan harus ke kantor, antri. Sekarang dari warung saya bisa
+      transfer langsung. Anak saya juga lebih percaya — semuanya tercatat di HP."
+    </div>
+    <div class="quote-att">
+      <div class="quote-av">SR</div>
+      <div>
+        <div class="quote-name">Sari Rahayu</div>
+        <div class="quote-role">Pedagang · Anggota KSP Sejahtera Solo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="container">
+    <div class="eyebrow">Mulai sekarang</div>
+    <h2>Koperasimu siap pindah ke digital?</h2>
+    <p>Kami bantu setup, migrasi data anggota, dan pelatihan pengurus. Tanpa biaya setup.</p>
+    <a href="#" class="btn primary">Daftarkan koperasimu</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <img src="../../assets/logo/sembada-lockup-mono.svg" height="48" style="filter:brightness(0) invert(1);opacity:0.9">
+        <p style="font:500 13px/1.6 var(--font-sans);color:var(--cream-300);margin-top:14px;max-width:300px">
+          Platform digital untuk koperasi simpan pinjam Indonesia. Dari anggota, oleh anggota, untuk anggota.
+        </p>
+      </div>
+      <div>
+        <h4>Produk</h4>
+        <a href="#">Aplikasi anggota</a>
+        <a href="#">Dashboard pengurus</a>
+        <a href="#">Aplikasi teller</a>
+        <a href="#">API & integrasi</a>
+      </div>
+      <div>
+        <h4>Koperasi</h4>
+        <a href="#">Daftar koperasi</a>
+        <a href="#">Onboarding</a>
+        <a href="#">Pelatihan</a>
+        <a href="#">Studi kasus</a>
+      </div>
+      <div>
+        <h4>Tentang</h4>
+        <a href="#">Tim</a>
+        <a href="#">Karier</a>
+        <a href="#">Kontak</a>
+        <a href="#">Bantuan</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 PT Sembada Koperasi Digital. Terdaftar & diawasi OJK.</span>
+      <span>Kebijakan privasi · Syarat & ketentuan</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

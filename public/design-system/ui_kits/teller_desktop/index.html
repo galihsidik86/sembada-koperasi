@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Sembada Teller</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body{margin:0;background:var(--cream-300);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+  #root{width:1280px;height:840px}
+  .teller{display:flex;height:100%;background:var(--bg)}
+  .t-side{width:240px;background:var(--tanah-900);color:var(--cream-200);padding:18px 14px;display:flex;flex-direction:column;gap:6px}
+  .t-side .lockup{display:flex;align-items:center;gap:8px;padding:6px 8px 16px;border-bottom:1px solid rgba(245,241,232,0.12);margin-bottom:8px}
+  .t-side .lockup .nm{font:600 16px var(--font-display);color:var(--cream-100);font-variation-settings:"opsz" 36,"SOFT" 30}
+  .t-side .lockup .sb{font:700 9px var(--font-sans);letter-spacing:0.14em;color:var(--emas-300)}
+  .t-side .item{padding:9px 10px;border-radius:8px;font:500 13px var(--font-sans);color:var(--cream-300);cursor:pointer;display:flex;align-items:center;gap:10px}
+  .t-side .item.act{background:var(--sogan-500);color:var(--cream-50);font-weight:700}
+  .t-side .sec{font:700 10px var(--font-sans);letter-spacing:0.12em;color:var(--cream-400);text-transform:uppercase;padding:14px 10px 4px}
+  .t-main{flex:1;display:flex;flex-direction:column}
+  .t-bar{height:48px;background:var(--cream-50);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px}
+  .t-bar .tlr{margin-left:auto;display:flex;align-items:center;gap:10px;font:600 12px var(--font-sans);color:var(--fg2)}
+  .t-bar .tlr .av{width:28px;height:28px;border-radius:9999px;background:var(--sogan-500);color:#F5F1E8;display:flex;align-items:center;justify-content:center;font:700 11px var(--font-sans)}
+  .t-content{flex:1;padding:24px 28px;display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+  .panel{background:#FFFFFF;border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:var(--shadow-sm)}
+  .panel h3{font:700 14px var(--font-sans);color:var(--fg1);margin:0 0 14px;text-transform:uppercase;letter-spacing:0.08em}
+  /* member panel */
+  .mb{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .mb-av{width:60px;height:60px;border-radius:9999px;background:var(--sogan-500);color:#F5F1E8;display:flex;align-items:center;justify-content:center;font:700 22px var(--font-sans)}
+  .mb-name{font:700 20px var(--font-sans);color:var(--fg1)}
+  .mb-meta{font:500 13px var(--font-mono);color:var(--fg2);margin-top:3px}
+  .mb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .mb-cell{background:var(--cream-50);border-radius:8px;padding:10px 12px}
+  .mb-cell .l{font:600 10px var(--font-sans);letter-spacing:0.08em;color:var(--fg2);text-transform:uppercase}
+  .mb-cell .v{font:700 16px var(--font-sans);color:var(--fg1);margin-top:3px;font-feature-settings:"tnum"}
+  /* trans panel */
+  .tab-row{display:flex;gap:6px;margin-bottom:16px}
+  .tab{padding:9px 14px;border-radius:8px;font:600 13px var(--font-sans);color:var(--fg2);background:var(--cream-50);border:1px solid var(--border);cursor:pointer}
+  .tab.act{background:var(--sogan-500);color:#F5F1E8;border-color:var(--sogan-500)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font:600 12px var(--font-sans);color:var(--fg1);margin-bottom:6px}
+  .field input,.field select{width:100%;padding:11px 13px;border:1px solid var(--border-strong);background:#fff;border-radius:8px;font:500 14px var(--font-sans);color:var(--fg1);outline:none}
+  .field input:focus{border-color:var(--primary);box-shadow:var(--shadow-focus)}
+  .amount-input{font-family:var(--font-display);font-size:28px;font-weight:600;font-variation-settings:"opsz" 48;color:var(--wedel-900);font-feature-settings:"tnum";letter-spacing:-0.01em}
+  .actions{display:flex;gap:10px;margin-top:20px}
+  .btn{flex:1;padding:13px;border-radius:8px;font:700 14px var(--font-sans);cursor:pointer;border:1px solid var(--border-strong);background:#fff;color:var(--fg1)}
+  .btn.primary{background:var(--primary);color:#F5F1E8;border:none}
+  /* recent table */
+  .recent{margin-top:24px;grid-column:1 / -1}
+  .tbl{width:100%;border-collapse:collapse}
+  .tbl th{text-align:left;padding:8px 10px;font:700 11px var(--font-sans);letter-spacing:0.08em;color:var(--fg2);text-transform:uppercase;border-bottom:1px solid var(--border)}
+  .tbl td{padding:11px 10px;font:500 13px var(--font-sans);color:var(--fg1);border-bottom:1px solid var(--cream-200)}
+  .tbl tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:2px 8px;border-radius:9999px;font:700 10px var(--font-sans);letter-spacing:0.04em;text-transform:uppercase}
+  .p-suc{background:var(--success-soft);color:var(--padi-700)}
+  .p-pen{background:var(--accent-soft);color:var(--emas-700)}
+</style></head>
+<body data-screen-label="Sembada Teller — Desktop">
+
+<div id="root">
+<div class="teller">
+  <aside class="t-side">
+    <div class="lockup">
+      <img src="../../assets/logo/sembada-mark.svg" width="32" height="32">
+      <div><div class="nm">Sembada</div><div class="sb">TELLER</div></div>
+    </div>
+    <div class="sec">Transaksi</div>
+    <div class="item act">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13c0-3 2.5-5 6-5h6c3.5 0 6 2 6 5v3c0 2-1.5 3.5-3.5 3.5H6.5C4.5 19.5 3 18 3 16z" stroke-linecap="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round"/></svg>
+      Setor / Tarik
+    </div>
+    <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bayar cicilan</div>
+    <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Bayar tagihan</div>
+    <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6l3 12 12-1V6H6"/></svg>Cetak slip</div>
+    <div class="sec">Hari ini</div>
+    <div class="item">Total transaksi · 47</div>
+    <div class="item">Saldo kas · Rp 28,4 jt</div>
+    <div style="margin-top:auto;padding:10px;background:rgba(245,241,232,0.08);border-radius:8px;font:500 11px var(--font-sans);color:var(--cream-300)">
+      Tutup buku akan dimulai pukul 16:00 WIB.
+    </div>
+  </aside>
+
+  <div class="t-main">
+    <div class="t-bar">
+      <span style="font:600 13px var(--font-mono);color:var(--fg2)">F1 Bantuan</span>
+      <span style="font:600 13px var(--font-mono);color:var(--fg2)">F2 Cari anggota</span>
+      <span style="font:600 13px var(--font-mono);color:var(--fg2)">F4 Cetak</span>
+      <div class="tlr">
+        <div class="av">RA</div>
+        <span>Rini Aprilia · Teller 02</span>
+      </div>
+    </div>
+
+    <div class="t-content">
+      <div class="panel">
+        <h3>Anggota</h3>
+        <div class="field">
+          <label>Cari NIK / No. Anggota / Nama</label>
+          <input value="NA-00821" style="font-family:var(--font-mono);letter-spacing:0.04em">
+        </div>
+        <div class="mb">
+          <div class="mb-av">SR</div>
+          <div>
+            <div class="mb-name">Sari Rahayu</div>
+            <div class="mb-meta">NA-00821 · Solo · Aktif sejak 2022</div>
+          </div>
+        </div>
+        <div class="mb-grid">
+          <div class="mb-cell"><div class="l">Simpanan pokok</div><div class="v">Rp 500.000</div></div>
+          <div class="mb-cell"><div class="l">Simpanan wajib</div><div class="v">Rp 4.200.000</div></div>
+          <div class="mb-cell"><div class="l">Simpanan sukarela</div><div class="v">Rp 7.720.000</div></div>
+          <div class="mb-cell"><div class="l">Pinjaman aktif</div><div class="v">Rp 5.000.000</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Transaksi baru</h3>
+        <div class="tab-row">
+          <button class="tab act">Setor</button>
+          <button class="tab">Tarik</button>
+          <button class="tab">Cicilan</button>
+        </div>
+        <div class="field">
+          <label>Jenis simpanan</label>
+          <select><option>Sukarela</option><option>Wajib</option><option>Pokok</option></select>
+        </div>
+        <div class="field">
+          <label>Nominal</label>
+          <input class="amount-input" value="Rp 500.000">
+        </div>
+        <div class="field">
+          <label>Catatan (opsional)</label>
+          <input placeholder="Mis. Setoran rutin Mei 2026">
+        </div>
+        <div class="actions">
+          <button class="btn">Batal (Esc)</button>
+          <button class="btn primary">Konfirmasi setor (Enter)</button>
+        </div>
+      </div>
+
+      <div class="panel recent">
+        <h3>Transaksi 30 menit terakhir</h3>
+        <table class="tbl">
+          <thead><tr><th>Waktu</th><th>Anggota</th><th>Jenis</th><th>Nominal</th><th>Teller</th><th>Status</th><th>Ref</th></tr></thead>
+          <tbody>
+            <tr><td>11:34</td><td>Sari Rahayu · NA-00821</td><td>Setor sukarela</td><td class="tabular" style="font-weight:700">Rp 500.000</td><td>RA</td><td><span class="pill p-suc">Selesai</span></td><td style="font-family:var(--font-mono);font-size:12px">TRX-2026-0512-AX9P</td></tr>
+            <tr><td>11:28</td><td>Joko Susilo · NA-00321</td><td>Tarik tunai</td><td class="tabular" style="font-weight:700">Rp 1.200.000</td><td>RA</td><td><span class="pill p-suc">Selesai</span></td><td style="font-family:var(--font-mono);font-size:12px">TRX-2026-0512-BR2K</td></tr>
+            <tr><td>11:21</td><td>Tini Sumarni · NA-00455</td><td>Bayar cicilan</td><td class="tabular" style="font-weight:700">Rp 458.000</td><td>RA</td><td><span class="pill p-suc">Selesai</span></td><td style="font-family:var(--font-mono);font-size:12px">TRX-2026-0512-CC1M</td></tr>
+            <tr><td>11:14</td><td>Hendra Wijaya · NA-00612</td><td>Setor wajib</td><td class="tabular" style="font-weight:700">Rp 200.000</td><td>RA</td><td><span class="pill p-pen">Cetak slip</span></td><td style="font-family:var(--font-mono);font-size:12px">TRX-2026-0512-DV8T</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body></html>

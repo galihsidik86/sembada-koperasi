@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" width="120" height="24" preserveAspectRatio="none">
+  
+  <g fill="currentColor" color="#8B2E2E">
+    <polygon points="0,24 6,4 12,24"></polygon>
+    <polygon points="12,24 18,4 24,24"></polygon>
+    <polygon points="24,24 30,4 36,24"></polygon>
+    <polygon points="36,24 42,4 48,24"></polygon>
+    <polygon points="48,24 54,4 60,24"></polygon>
+    <polygon points="60,24 66,4 72,24"></polygon>
+    <polygon points="72,24 78,4 84,24"></polygon>
+    <polygon points="84,24 90,4 96,24"></polygon>
+    <polygon points="96,24 102,4 108,24"></polygon>
+    <polygon points="108,24 114,4 120,24"></polygon>
+  </g>
+</svg>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Email — Sembada</title>
+<style>
+  /* Email-safe styles. Inline these for production; here we use <style> for preview convenience. */
+  body{margin:0;background:#D6C9B3;padding:32px;font-family:Georgia,'Times New Roman',serif}
+  table{border-collapse:collapse}
+  .wrap{max-width:600px;margin:0 auto}
+  .card{background:#FFFFFF;border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(92,58,30,0.15)}
+  .header{background:#5C3A1E;padding:20px 28px;color:#F5F1E8}
+  .brand{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:600;letter-spacing:-0.01em}
+  .sub{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:9px;letter-spacing:0.16em;color:#ECC979;font-weight:700;margin-top:2px;text-transform:uppercase}
+  .accent{height:4px;background:#A86B2E;background-image:repeating-linear-gradient(90deg,#A86B2E 0,#A86B2E 8px,#D4A437 8px,#D4A437 12px)}
+  .body{padding:32px 28px;color:#1F1B16;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6}
+  h1{font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:600;margin:0 0 8px;color:#1F1B16;letter-spacing:-0.01em}
+  .receipt{background:#F5F1E8;border-radius:8px;padding:18px 20px;margin:20px 0}
+  .row{display:table;width:100%;padding:6px 0;border-bottom:1px solid #ECE5D8;font-size:13px}
+  .row:last-child{border-bottom:none;padding-top:10px;margin-top:6px;border-top:1px solid #5C3A1E;font-weight:700;font-size:15px}
+  .row .l{display:table-cell;color:#5E6464;font-family:-apple-system,sans-serif}
+  .row .v{display:table-cell;text-align:right;color:#1F1B16;font-family:'SF Mono',Menlo,monospace;font-feature-settings:"tnum"}
+  .btn{display:inline-block;background:#A86B2E;color:#F5F1E8;text-decoration:none;font-family:-apple-system,sans-serif;font-size:14px;font-weight:700;padding:13px 26px;border-radius:8px;margin-top:10px}
+  .footer{padding:24px 28px;background:#F5F1E8;font-family:-apple-system,sans-serif;font-size:11px;color:#8C6B4A;line-height:1.6;text-align:center}
+  .footer a{color:#5C3A1E;text-decoration:none;font-weight:700}
+  .label{display:inline-block;background:#E8F0E0;color:#3F6B2E;padding:3px 10px;border-radius:9999px;font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+  .stack{display:flex;flex-direction:column;gap:24px}
+</style></head>
+<body data-screen-label="Email Templates">
+
+<div class="wrap stack">
+
+  <!-- 1. Setoran berhasil -->
+  <table class="card" width="100%">
+    <tr><td class="header">
+      <div class="brand">Sembada</div>
+      <div class="sub">Koperasi Digital</div>
+    </td></tr>
+    <tr><td class="accent"></td></tr>
+    <tr><td class="body">
+      <span class="label">Setoran Berhasil</span>
+      <h1 style="margin-top:14px">Halo, Sari 👋</h1>
+      <p>Setoran simpanan sukarela kamu sudah masuk. Berikut detailnya:</p>
+      <div class="receipt">
+        <div class="row"><span class="l">Tanggal</span><span class="v">12 Mei 2026 · 11:34 WIB</span></div>
+        <div class="row"><span class="l">Jenis</span><span class="v">Simpanan Sukarela</span></div>
+        <div class="row"><span class="l">No. Referensi</span><span class="v">TRX-2026-0512-AX9P</span></div>
+        <div class="row"><span class="l">Nominal</span><span class="v">Rp 500.000</span></div>
+      </div>
+      <p style="margin-top:0">Saldo simpanan sukarela kamu sekarang <strong>Rp 7.720.000</strong>. Terus konsisten, ya — sedikit-sedikit lama-lama jadi bukit.</p>
+      <a href="#" class="btn">Lihat di aplikasi</a>
+    </td></tr>
+    <tr><td class="footer">
+      Sembada Koperasi Digital · Cabang Solo<br>
+      <a href="#">sembada.id</a> · Bantuan: 0800-1-SEMBADA<br>
+      <span style="color:#A89880">Kamu menerima email ini karena terdaftar sebagai anggota koperasi.</span>
+    </td></tr>
+  </table>
+
+  <!-- 2. Pinjaman disetujui -->
+  <table class="card" width="100%">
+    <tr><td class="header">
+      <div class="brand">Sembada</div>
+      <div class="sub">Koperasi Digital</div>
+    </td></tr>
+    <tr><td class="accent"></td></tr>
+    <tr><td class="body">
+      <span class="label" style="background:#FAE9C2;color:#7A5316">Pengajuan Disetujui</span>
+      <h1 style="margin-top:14px">Pengajuan pinjaman kamu disetujui</h1>
+      <p>Kabar baik. Pengurus cabang Solo sudah menyetujui pengajuan pinjamanmu pagi ini. Dana akan dicairkan ke rekening simpanan sukarela paling lambat <strong>besok, 13 Mei 2026</strong>.</p>
+      <div class="receipt">
+        <div class="row"><span class="l">No. Pengajuan</span><span class="v">PJM-2026-0512-K2F</span></div>
+        <div class="row"><span class="l">Tujuan</span><span class="v">Modal Usaha</span></div>
+        <div class="row"><span class="l">Tenor</span><span class="v">12 bulan</span></div>
+        <div class="row"><span class="l">Cicilan / bulan</span><span class="v">Rp 458.000</span></div>
+        <div class="row"><span class="l">Nominal Disetujui</span><span class="v">Rp 5.000.000</span></div>
+      </div>
+      <p>Cicilan pertama jatuh tempo <strong>13 Juni 2026</strong>. Kami akan kirim pengingat 3 hari sebelumnya.</p>
+      <a href="#" class="btn">Tanda tangani digital</a>
+    </td></tr>
+    <tr><td class="footer">
+      Sembada Koperasi Digital · Cabang Solo<br>
+      <a href="#">sembada.id</a> · Bantuan: 0800-1-SEMBADA
+    </td></tr>
+  </table>
+
+  <!-- 3. Pengingat cicilan -->
+  <table class="card" width="100%">
+    <tr><td class="header">
+      <div class="brand">Sembada</div>
+      <div class="sub">Koperasi Digital</div>
+    </td></tr>
+    <tr><td class="accent"></td></tr>
+    <tr><td class="body">
+      <span class="label" style="background:#FAE9C2;color:#7A5316">Pengingat Lembut</span>
+      <h1 style="margin-top:14px">Cicilan jatuh tempo 3 hari lagi</h1>
+      <p>Halo Pak Joko, mengingatkan saja: cicilan pinjaman modal usaha kamu jatuh tempo <strong>15 Mei 2026</strong>. Kalau sudah dibayar, abaikan email ini ya 🙏</p>
+      <div class="receipt">
+        <div class="row"><span class="l">Pinjaman</span><span class="v">PJM-2025-1108-J1K</span></div>
+        <div class="row"><span class="l">Cicilan ke</span><span class="v">7 dari 18</span></div>
+        <div class="row"><span class="l">Jatuh Tempo</span><span class="v">15 Mei 2026</span></div>
+        <div class="row"><span class="l">Nominal</span><span class="v">Rp 612.000</span></div>
+      </div>
+      <p>Pembayaran bisa lewat aplikasi, transfer bank, atau langsung ke kantor cabang Solo. Pilih yang paling enak buat kamu.</p>
+      <a href="#" class="btn">Bayar sekarang</a>
+    </td></tr>
+    <tr><td class="footer">
+      Sembada Koperasi Digital · Cabang Solo<br>
+      <a href="#">sembada.id</a> · Bantuan: 0800-1-SEMBADA
+    </td></tr>
+  </table>
+
+</div>
+</body></html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;box-shadow:var(--shadow-sm)}
+  .card h4{font:700 12px var(--font-sans);text-transform:uppercase;letter-spacing:.08em;color:var(--fg2);margin:0 0 8px}
+  .amount{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--wedel-900);font-variation-settings:"opsz" 48,"SOFT" 30}
+  .delta{font:600 12px var(--font-sans);color:var(--padi-500);margin-top:4px}
+  .hero{background:linear-gradient(135deg,#8B2E2E,#5E1F1F);color:#F5F1E8;border:none;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;background-image:url('../assets/patterns/kawung.svg');background-size:80px;opacity:.08}
+  .hero h4{color:rgba(245,241,232,.7)}
+  .hero .amount{color:#F5F1E8}
+  .hero .delta{color:#ECC979}
+</style></head>
+<body>
+<div class="grid">
+  <div class="card hero">
+    <h4>Total simpanan</h4>
+    <div class="amount">Rp 12,4 jt</div>
+    <div class="delta">+Rp 250.000 bulan ini</div>
+  </div>
+  <div class="card">
+    <h4>Cicilan jalan</h4>
+    <div class="amount">Rp 1,8 jt</div>
+    <div class="delta" style="color:var(--fg2)">3 dari 12 bulan</div>
+  </div>
+</div>
+</body></html>

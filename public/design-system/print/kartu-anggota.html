@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Kartu Anggota — Print</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;background:#D6C9B3;padding:40px;display:flex;gap:32px;flex-wrap:wrap;justify-content:center;min-height:100vh}
+  /* CR80 card: 85.6 × 53.98 mm = 324 × 204 px @ 96dpi (we use 360x227 for legibility on screen) */
+  .card{width:360px;height:227px;background:#FFFFFF;border-radius:16px;box-shadow:0 14px 40px rgba(92,58,30,0.25);overflow:hidden;position:relative;display:flex;flex-direction:column}
+  /* Front face */
+  .front{background:linear-gradient(135deg,#5C3A1E 0%,#8B2E2E 100%);color:#F5F1E8;padding:18px 20px;height:100%;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+  .front::after{content:"";position:absolute;inset:0;background-image:url('../assets/patterns/parang.svg');background-size:140px;opacity:0.08;pointer-events:none}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;position:relative}
+  .top .brand{display:flex;align-items:center;gap:8px}
+  .top .brand .nm{font:600 18px var(--font-display);font-variation-settings:"opsz" 36,"SOFT" 30}
+  .top .brand .sb{font:700 8px var(--font-sans);letter-spacing:0.16em;color:#ECC979}
+  .top img{width:32px;height:32px;filter:brightness(0) invert(1);opacity:0.85}
+  .person{position:relative}
+  .person .lbl{font:700 9px var(--font-sans);letter-spacing:0.14em;color:rgba(245,241,232,0.65);text-transform:uppercase}
+  .person .nm{font:600 22px var(--font-display);font-variation-settings:"opsz" 48,"SOFT" 30;margin-top:2px;letter-spacing:-0.01em}
+  .bottom{position:relative;display:flex;justify-content:space-between;align-items:flex-end}
+  .bottom .col .lbl{font:700 8px var(--font-sans);letter-spacing:0.14em;color:rgba(245,241,232,0.6);text-transform:uppercase}
+  .bottom .col .v{font:600 13px var(--font-mono);color:#F5F1E8;margin-top:2px;letter-spacing:0.05em}
+  .qr{width:60px;height:60px;background:#F5F1E8;border-radius:6px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);padding:5px;gap:1px}
+  .qr div{background:#5C3A1E}
+  .qr .w{background:transparent}
+  /* tumpal strip */
+  .tumpal{position:absolute;left:0;right:0;bottom:0;height:8px;background:#D4A437}
+  .tumpal::before{content:"";position:absolute;inset:0;background-image:url('../assets/patterns/tumpal.svg');background-size:24px 8px;background-repeat:repeat-x}
+
+  /* Back face */
+  .back{background:#F5F1E8;color:#5C3A1E;padding:18px 20px;height:100%;display:flex;flex-direction:column;gap:10px;position:relative}
+  .magstripe{position:absolute;top:24px;left:0;right:0;height:32px;background:#1F1B16}
+  .back .field{margin-top:60px;display:flex;flex-direction:column;gap:8px}
+  .back .lbl{font:700 8px var(--font-sans);letter-spacing:0.14em;color:#8C6B4A;text-transform:uppercase;margin-bottom:2px}
+  .sig{height:24px;background:#FFFFFF;border:1px solid #ECE5D8;border-radius:4px;padding:2px 8px;font:italic 12px var(--font-display);color:#8C6B4A;display:flex;align-items:center}
+  .back .small{font:500 9px/1.4 var(--font-sans);color:#8C6B4A;margin-top:auto;text-align:center}
+</style></head>
+<body data-screen-label="Kartu Anggota Print">
+
+<div class="card">
+  <div class="front">
+    <div class="top">
+      <div class="brand">
+        <img src="../assets/logo/sembada-mark.svg">
+        <div><div class="nm">Sembada</div><div class="sb">KARTU ANGGOTA</div></div>
+      </div>
+      <div style="font:700 9px var(--font-sans);letter-spacing:0.14em;color:#ECC979;text-align:right">KSP SEJAHTERA<br><span style="color:rgba(245,241,232,0.7);font-weight:500;letter-spacing:0.08em">CABANG SOLO</span></div>
+    </div>
+    <div class="person">
+      <div class="lbl">Nama Anggota</div>
+      <div class="nm">Sari Rahayu</div>
+    </div>
+    <div class="bottom">
+      <div style="display:flex;gap:24px">
+        <div class="col"><div class="lbl">No. Anggota</div><div class="v">NA-00821</div></div>
+        <div class="col"><div class="lbl">Anggota Sejak</div><div class="v">03 / 2022</div></div>
+        <div class="col"><div class="lbl">Berlaku</div><div class="v">12 / 2027</div></div>
+      </div>
+      <div class="qr">
+        <!-- 7x7 placeholder finder pattern -->
+        <div></div><div></div><div></div><div class="w"></div><div></div><div></div><div></div>
+        <div></div><div class="w"></div><div></div><div class="w"></div><div></div><div class="w"></div><div></div>
+        <div></div><div></div><div class="w"></div><div></div><div></div><div></div><div></div>
+        <div class="w"></div><div></div><div></div><div class="w"></div><div></div><div></div><div class="w"></div>
+        <div></div><div class="w"></div><div></div><div></div><div></div><div class="w"></div><div></div>
+        <div></div><div></div><div class="w"></div><div></div><div class="w"></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+    <div class="tumpal"></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="back">
+    <div class="magstripe"></div>
+    <div class="field">
+      <div>
+        <div class="lbl">Tanda Tangan Anggota</div>
+        <div class="sig">Sari Rahayu</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div><div class="lbl">NIK</div><div style="font:600 11px var(--font-mono)">3273010512870001</div></div>
+        <div><div class="lbl">Tgl Terbit</div><div style="font:600 11px var(--font-mono)">12 / 03 / 2022</div></div>
+      </div>
+    </div>
+    <div class="small">
+      Kartu ini milik Sembada Koperasi Digital. Jika ditemukan, mohon kembalikan ke kantor terdekat.<br>
+      <strong style="color:#5C3A1E">www.sembada.id</strong> · Bantuan 0800-1-SEMBADA
+    </div>
+  </div>
+</div>
+
+</body></html>

@@ -1,0 +1,18 @@
+@import './colors_and_type.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html, body {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        background: var(--cream-100);
+        color: var(--tanah-700);
+    }
+
+    *:focus-visible {
+        outline: 2px solid var(--sogan-500);
+        outline-offset: 2px;
+    }
+}

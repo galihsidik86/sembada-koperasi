@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id"><head>
+<meta charset="utf-8"><title>Formulir Pengajuan Pinjaman — Print</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  @page { size: A4; margin: 0; }
+  body{margin:0;background:#D6C9B3;padding:32px;display:flex;justify-content:center;min-height:100vh}
+  .page{width:794px;min-height:1123px;background:#FFFFFF;padding:48px 56px;box-shadow:0 14px 40px rgba(92,58,30,0.2);position:relative}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--sogan-500);padding-bottom:14px;margin-bottom:18px}
+  .header .left{display:flex;align-items:center;gap:14px}
+  .header img{width:56px;height:56px}
+  .header .nm{font:600 28px var(--font-display);font-variation-settings:"opsz" 48,"SOFT" 30;color:var(--tanah-700);letter-spacing:-0.01em}
+  .header .sb{font:700 10px var(--font-sans);letter-spacing:0.14em;color:var(--sogan-500);text-transform:uppercase}
+  .header .right{text-align:right}
+  .header .right .doc{font:700 11px var(--font-sans);letter-spacing:0.1em;color:var(--fg2);text-transform:uppercase}
+  .header .right .num{font:600 14px var(--font-mono);color:var(--fg1);margin-top:3px}
+  .title{font:600 26px var(--font-display);font-variation-settings:"opsz" 48,"SOFT" 30;color:var(--wedel-900);text-align:center;margin:14px 0 4px}
+  .subtitle{font:500 13px var(--font-sans);color:var(--fg2);text-align:center;margin-bottom:24px}
+  .section{margin-bottom:22px}
+  .sec-h{display:flex;align-items:center;gap:10px;font:700 11px var(--font-sans);letter-spacing:0.12em;color:#FFFFFF;background:var(--sogan-500);text-transform:uppercase;padding:7px 12px;border-radius:4px}
+  .sec-h .n{width:20px;height:20px;background:var(--cream-100);color:var(--sogan-500);border-radius:9999px;display:flex;align-items:center;justify-content:center;font-size:11px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;margin-top:14px}
+  .grid.full{grid-template-columns:1fr}
+  .field{display:flex;flex-direction:column;gap:4px}
+  .field .lbl{font:600 10px var(--font-sans);letter-spacing:0.06em;color:var(--fg1);text-transform:uppercase}
+  .field .line{border-bottom:1px solid #5C3A1E;height:22px;font:500 14px var(--font-sans);color:var(--fg1);padding:0 4px;display:flex;align-items:flex-end}
+  .checkboxes{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+  .check{display:flex;align-items:center;gap:6px;font:500 12px var(--font-sans);color:var(--fg1)}
+  .check .box{width:14px;height:14px;border:1.5px solid var(--tanah-700);border-radius:2px}
+  .check .box.x{background:var(--sogan-500);border-color:var(--sogan-500);position:relative}
+  .check .box.x::after{content:"✓";color:#fff;font-size:11px;position:absolute;top:-3px;left:1px;font-weight:700}
+  .nominal{background:var(--cream-100);border:1px solid var(--cream-300);padding:14px 18px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  .nominal .l{font:600 11px var(--font-sans);letter-spacing:0.08em;color:var(--fg2);text-transform:uppercase}
+  .nominal .v{font:600 24px var(--font-display);color:var(--wedel-900);font-feature-settings:"tnum"}
+  .signs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:30px;border-top:1px solid var(--border);padding-top:24px}
+  .sign{text-align:center}
+  .sign .role{font:700 11px var(--font-sans);letter-spacing:0.1em;color:var(--fg1);text-transform:uppercase}
+  .sign .sub{font:500 11px var(--font-sans);color:var(--fg2);margin-top:2px}
+  .sign .box{height:80px;border-bottom:1px solid var(--tanah-700);margin:14px 0 6px}
+  .sign .name{font:600 12px var(--font-sans);color:var(--fg1)}
+  .footer{position:absolute;bottom:30px;left:56px;right:56px;font:500 9px var(--font-sans);color:var(--fg3);display:flex;justify-content:space-between;border-top:1px solid var(--cream-200);padding-top:8px}
+  /* tumpal accent strip */
+  .tumpal{position:absolute;top:0;left:0;right:0;height:6px;background:url('../assets/patterns/tumpal.svg');background-size:18px 6px;background-repeat:repeat-x;color:var(--sogan-500)}
+</style></head>
+<body data-screen-label="Formulir Pengajuan Pinjaman">
+
+<div class="page">
+  <div class="tumpal"></div>
+  <div class="header">
+    <div class="left">
+      <img src="../assets/logo/sembada-mark.svg">
+      <div>
+        <div class="nm">Sembada</div>
+        <div class="sb">Koperasi Digital</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="doc">Formulir No.</div>
+      <div class="num">FRM-PJM-2026-0512</div>
+      <div style="font:500 11px var(--font-sans);color:var(--fg2);margin-top:6px">Cabang Solo · 12 Mei 2026</div>
+    </div>
+  </div>
+
+  <div class="title">Formulir Pengajuan Pinjaman</div>
+  <div class="subtitle">Mohon isi dengan lengkap dan jujur. Data ini bersifat rahasia.</div>
+
+  <div class="section">
+    <div class="sec-h"><span class="n">1</span> Data Anggota</div>
+    <div class="grid">
+      <div class="field"><span class="lbl">Nama Lengkap</span><span class="line">Sari Rahayu</span></div>
+      <div class="field"><span class="lbl">No. Anggota</span><span class="line" style="font-family:var(--font-mono)">NA-00821</span></div>
+      <div class="field"><span class="lbl">NIK</span><span class="line" style="font-family:var(--font-mono)">3273010512870001</span></div>
+      <div class="field"><span class="lbl">Tanggal Lahir</span><span class="line">12 Mei 1987</span></div>
+      <div class="field" style="grid-column:1 / -1"><span class="lbl">Alamat</span><span class="line">Jl. Slamet Riyadi No. 142, Kelurahan Penumping, Solo</span></div>
+      <div class="field"><span class="lbl">No. HP</span><span class="line">0812-3344-5566</span></div>
+      <div class="field"><span class="lbl">Pekerjaan</span><span class="line">Pedagang (UMKM)</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-h"><span class="n">2</span> Detail Pinjaman</div>
+    <div class="nominal">
+      <span class="l">Nominal Diajukan</span>
+      <span class="v">Rp 5.000.000</span>
+    </div>
+    <div class="grid" style="margin-top:14px">
+      <div class="field"><span class="lbl">Lama Pinjaman</span><span class="line">12 bulan</span></div>
+      <div class="field"><span class="lbl">Cicilan / Bulan</span><span class="line">Rp 458.000</span></div>
+    </div>
+    <div style="margin-top:12px">
+      <span class="lbl" style="font:600 10px var(--font-sans);color:var(--fg1);letter-spacing:0.06em;text-transform:uppercase">Tujuan Pinjaman</span>
+      <div class="checkboxes">
+        <div class="check"><span class="box x"></span>Modal usaha</div>
+        <div class="check"><span class="box"></span>Pendidikan</div>
+        <div class="check"><span class="box"></span>Kesehatan</div>
+        <div class="check"><span class="box"></span>Renovasi rumah</div>
+        <div class="check"><span class="box"></span>Lainnya</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-h"><span class="n">3</span> Riwayat Simpanan & Penjamin</div>
+    <div class="grid">
+      <div class="field"><span class="lbl">Total Simpanan Saat Ini</span><span class="line">Rp 12.420.000</span></div>
+      <div class="field"><span class="lbl">Lama Keanggotaan</span><span class="line">4 tahun 2 bulan</span></div>
+      <div class="field"><span class="lbl">Nama Penjamin</span><span class="line">Bambang Rahayu</span></div>
+      <div class="field"><span class="lbl">Hubungan</span><span class="line">Suami</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-h"><span class="n">4</span> Pernyataan</div>
+    <p style="font:500 12px/1.6 var(--font-sans);color:var(--fg1);margin-top:12px">
+      Saya menyatakan bahwa data yang saya isi adalah benar dan bersedia untuk diverifikasi
+      oleh pengurus koperasi. Saya bersedia mematuhi seluruh ketentuan pinjaman yang berlaku
+      di Sembada Koperasi, termasuk pembayaran cicilan tepat waktu, dan menerima konsekuensi
+      apabila terjadi kelalaian.
+    </p>
+  </div>
+
+  <div class="signs">
+    <div class="sign"><div class="role">Pemohon</div><div class="sub">Anggota</div><div class="box"></div><div class="name">Sari Rahayu</div></div>
+    <div class="sign"><div class="role">Penjamin</div><div class="sub">Suami / Keluarga</div><div class="box"></div><div class="name">Bambang Rahayu</div></div>
+    <div class="sign"><div class="role">Pengurus</div><div class="sub">Cabang Solo</div><div class="box"></div><div class="name">Budi Wibowo</div></div>
+  </div>
+
+  <div class="footer">
+    <span>Sembada Koperasi Digital · sembada.id · 0800-1-SEMBADA</span>
+    <span>Halaman 1 / 1 · FRM-PJM-2026-0512</span>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Sembada Anggota — UI Kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body { background: var(--cream-200); display:flex; gap:32px; padding:32px;
+         flex-wrap:wrap; justify-content:center; min-height:100vh; }
+  .stage { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .stage-label { font:600 12px var(--font-sans); color:var(--fg2); letter-spacing:0.08em;
+                 text-transform:uppercase; }
+  .app-shell { width:100%; height:100%; background:var(--cream-100); display:flex; flex-direction:column; }
+  .app-content { flex:1; overflow:auto; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body data-screen-label="Sembada Anggota — UI Kit">
+
+<div class="stage">
+  <div id="root1" style="width:390px;height:844px"></div>
+  <div class="stage-label">Beranda · Pinjaman flow</div>
+</div>
+
+<div class="stage">
+  <div id="root2" style="width:390px;height:844px"></div>
+  <div class="stage-label">Riwayat transaksi</div>
+</div>
+
+<div class="stage">
+  <div id="root3" style="width:390px;height:844px"></div>
+  <div class="stage-label">Profil & kartu anggota</div>
+</div>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="screens.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const { useState } = React;
+
+function App({ initialTab='home', initialFlow=null }) {
+  const [tab, setTab]   = useState(initialTab);
+  const [flow, setFlow] = useState(initialFlow); // null | 'apply' | 'success'
+
+  let header, content;
+
+  if (flow === 'apply') {
+    header  = <AppHeader title="Ajukan pinjaman" onBack={()=>setFlow(null)}/>;
+    content = <ApplyLoanScreen go={(s)=>setFlow(s==='home'?null:s)}/>;
+  } else if (flow === 'success') {
+    header  = <AppHeader title="" onBack={()=>setFlow(null)}/>;
+    content = <SuccessScreen go={()=>{setFlow(null); setTab('home');}}/>;
+  } else {
+    if (tab === 'home') {
+      header  = <AppHeader title="Sembada" right={
+        <button style={{width:40,height:40,border:'none',background:'transparent',color:'#5C3A1E',cursor:'pointer'}}>
+          <SmIcon d={I.bell}/>
+        </button>}/>;
+      content = <HomeScreen go={(s)=>setFlow(s)}/>;
+    } else if (tab === 'rwt') {
+      header = <AppHeader title="Riwayat"/>;
+      content = <HistoryScreen/>;
+    } else if (tab === 'profile') {
+      header = <AppHeader title="Akun"/>;
+      content = <ProfileScreen/>;
+    } else {
+      header = <AppHeader title="Transfer"/>;
+      content = <div style={{padding:40, textAlign:'center', color:'#8C6B4A'}}>Transfer screen — coming soon</div>;
+    }
+  }
+
+  return (
+    <IOSDevice>
+      <div className="app-shell">
+        {header}
+        <div className="app-content">{content}</div>
+        {!flow && <BottomNav active={tab} onChange={setTab}/>}
+      </div>
+    </IOSDevice>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root1')).render(<App initialTab="home"/>);
+ReactDOM.createRoot(document.getElementById('root2')).render(<App initialTab="rwt"/>);
+ReactDOM.createRoot(document.getElementById('root3')).render(<App initialTab="profile"/>);
+</script>
+
+</body>
+</html>
